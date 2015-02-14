@@ -41,6 +41,7 @@ namespace KerbalConstructionTime
             GameEvents.OnPartPurchased.Add(PartPurchasedEvent);
             GameEvents.OnVesselRecoveryRequested.Add(RecoveryRequested);
             GameEvents.onGUIRnDComplexDespawn.Add(TechDisableEvent);
+            GameEvents.onGUIRnDComplexSpawn.Add(TechEnableEvent);
 
             eventAdded = true;
         }
@@ -174,6 +175,17 @@ namespace KerbalConstructionTime
                 foreach (KCT_TechItem tech in KCT_GameStates.TechList)
                 {
                     tech.DisableTech();
+                }
+            }
+        }
+
+        public void TechEnableEvent()
+        {
+            if (!KCT_GameStates.settings.InstantTechUnlock && !KCT_GameStates.settings.DisableBuildTime)
+            {
+                foreach (KCT_TechItem tech in KCT_GameStates.TechList)
+                {
+                    tech.EnableTech();
                 }
             }
         }
